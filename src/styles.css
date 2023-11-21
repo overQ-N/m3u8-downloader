@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sunzi-theme-color: rgba(8, 213, 106);
+  --sunzi-theme-color-alpha-75: rgba(8, 213, 106, 0.75);
+  --sunzi-theme-color-006: rgba(8, 213, 106, 0.06);
+  --sunzi-theme-color-o1: rgba(8, 213, 106, 0.1);
+  --sunzi-theme-color-o2: rgba(8, 213, 106, 0.2);
+  --sunzi-theme-color-o3: rgba(8, 213, 106, 0.3);
+  --sunzi-theme-color-o4: rgba(8, 213, 106, 0.4);
+  --sunzi-theme-color-o5: rgba(8, 213, 106, 0.5);
+  --sunzi-theme-color-o6: rgba(8, 213, 106, 0.6);
+  --sunzi-theme-color-o7: rgba(8, 213, 106, 0.7);
+  --sunzi-theme-color-o8: rgba(8, 213, 106, 0.8);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+@layer components {
+  .inner-border {
+    @apply relative before:absolute before:inset-0 before:pointer-events-none before:border;
+  }
+}

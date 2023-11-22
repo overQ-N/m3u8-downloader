@@ -1,5 +1,6 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+mod build_reqwest;
 mod parser;
 use std::collections::HashMap;
 
@@ -20,9 +21,19 @@ fn greet(curl: &str, name: &str, age: &str) -> (String, HashMap<String, String>)
     // )
 }
 
+#[tauri::command]
+fn parser_curl(value: &str) -> String {
+    println!("Hello, {}! You've been greeted from Rust!", value);
+    let mut m = HashMap::new();
+    m.insert(build_reqwest::Key::Curl, value);
+    let b: build_reqwest::BuildReqwest = m.into();
+    println!("build reqwest :{:?}", b);
+    "aa".to_string()
+}
+
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![greet, parser_curl])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

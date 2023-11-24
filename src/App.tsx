@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { invoke } from "@tauri-apps/api/tauri";
 import "./App.css";
 import Aside from "./components/aside";
@@ -52,6 +53,7 @@ ${[6, 10, 20, 30, 40, 50, 60, 70, 75, 80, 90]
       <Aside />
       <SubNav />
       <div className="flex-1">subnav</div>
+      <Toaster containerClassName="z-[99999]" />
     </div>
   );
 }

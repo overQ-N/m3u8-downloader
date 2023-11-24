@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-
+import plugin from 'tailwindcss/plugin'
+import daisyui from 'daisyui'
 const pxToRem = (px) => ({
   [px / 4]: `${px / 16}rem`,
 });
@@ -63,6 +64,15 @@ export default {
       maxWidth: Object.assign({}, ...evenRemArray),
     },
   },
-  plugins: [],
+  plugins: [daisyui, plugin(function ({ addBase }) {
+    addBase({
+      ".test": {
+        "display": "flex"
+      }
+    })
+  })],
+  daisyui: {
+    themes: ["bumblebee", "cupcake", "dark"],
+  }
 }
 

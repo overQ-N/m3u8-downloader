@@ -110,11 +110,11 @@ mod tests {
         --compressed");
 
         let expect_url: String = "https://api-iam.intercom.io/messenger/web/ping".into();
-        let b = form.get(&Key::Curl).unwrap();
+        // let b = form.get(&Key::Curl).unwrap();
 
         // let expect_headers =
         let build_reqwest: BuildReqwest = form.into();
-        println!("{:?}", b);
+        // println!("{:?}", b);
         assert_eq!(expect_url, build_reqwest.url);
     }
 }

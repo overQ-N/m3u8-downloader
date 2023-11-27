@@ -1,0 +1,51 @@
+name: m3u8_downloader
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_package:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+    
+     - name: Install Rust for windows-latest
+        if: matrix.os == 'windows-latest'
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable-x86_64-msvc
+          target: x86_64-pc-windows-msvc
+    
+    - name: Install Rust for macos-latest
+        if: matrix.os == 'macos-latest'
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          target: x86_64-apple-darwin
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build and Package
+        run: |
+          npm run tauri build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Application
+          path: dist

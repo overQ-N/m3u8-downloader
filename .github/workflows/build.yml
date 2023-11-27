@@ -1,9 +1,7 @@
 name: m3u8_downloader
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
   build_and_package:
@@ -22,15 +20,15 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 18
-    
-     - name: Install Rust for windows-latest
+
+      - name: Install Rust for windows-latest
         if: matrix.os == 'windows-latest'
         uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable-x86_64-msvc
           target: x86_64-pc-windows-msvc
-    
-    - name: Install Rust for macos-latest
+
+      - name: Install Rust for macos-latest
         if: matrix.os == 'macos-latest'
         uses: dtolnay/rust-toolchain@stable
         with:
